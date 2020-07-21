@@ -17,12 +17,13 @@ typedef struct DeviceInfo_st {
     unsigned char Valid[32];
 }DEVICEINFO;
 enum Info{DeviceID=1,DeviceType,DeviceVersion,DeviceName,DeviceCompany,DeviceAsymmetric,DeviceSymmertic,DeviceHash,DeviceStroage,DeviceDescription,Valid};
+enum Operation{Initialize=100,Finalize,GetDeviecCount,GetDeviceInfo,SetDeviceInfo,KeyGenerate};
 int SMF_Initialize(void** pMangeHandle);
 int SMF_Finalize(void* MangeHandle);
 int SMF_GetDeviceCount(void* MangeHandle);
 int SMF_GetDeviceInfo(void* MangeHandle, DEVICEINFO* pDeviceInfo);
 int SMF_SetDeviceInfo(void* MangeHandle, unsigned char deviceID[32], unsigned char* pData,enum Info rank);
-
+int SMF_KeyGenerate(void * MangeHandle,unsigned char deviceID[32]);
 int main ()
 {
 void ** pMangeHandle;
@@ -40,6 +41,36 @@ SMF_SetDeviceInfo(MangeHandle,DeviceID,pData,rank);
 
 }
 
+int Agent(enum Operation operation , void * message){
+    void ** pMangeHandle;
+    void * MangeHandle;
+    switch (operation)
+    {
+    case 100:
+        SMF_Initialize(pMangeHandle);
+        break;
+    case 101:
+        SMF_Finalize(MangeHandle);
+        break;
+    case 102:
+        SMF_GetDeviceCount(MangeHandle);
+        break;
+    case 103:
+        message=(DEVICEINFO*) message;
+        SMF_GetDeviceInfo(MangeHandle, message);
+        break;
+    case 104:
+        SMF_SetDeviceInfo(MangeHandle, unsigned char deviceID[32], unsigned char* pData,enum Info rank);
+        break;
+    case 105:
+        SMF_KeyGenerate(MangeHandle,unsigned char deviceID[32]);
+        break;
+
+    default:
+        break;
+    }
+    return 0;
+}
 
 int SMF_Initialize(void** pMangeHandle) {
 DEVICEINFO device;
@@ -198,3 +229,5 @@ free(fp2);
 system("mv device_temp.txt device.txt");
 return 0;
 }
+
+int SMF_KeyGenerate(void * MangeHandle,unsigned char devivceID[32]);
