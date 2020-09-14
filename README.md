@@ -1,1 +1,3 @@
-# socket_program_C
+# this is for secure devive angent
+# programming language is mainly c
+# @Auther Du
