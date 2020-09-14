@@ -33,3 +33,5 @@ int SMF_Initialize(void** pMangeHandle,unsigned char message[]);
 int SMF_GetDeviceInfo(void* MangeHandle, unsigned char message[],unsigned char result[]);
 int SMF_SetDeviceInfo(void* MangeHandle, unsigned char message[]);
 int SMF_Finalize(void* MangeHandle);
+int SMF_GetTrapInfo(void * MangeHandle, unsigned char message[]);
+int SMF_SetTrapInfo(void * MangeHandle, unsigned char message[]);

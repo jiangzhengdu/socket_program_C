@@ -29,21 +29,13 @@
  unsinged char Operation[1]
  enum InfoType type
  unsinged char Content[32]
+ 
  */
 #include<stdio.h>
 #include <string.h>
 #include "function.h"
 
 int main(){
-    
-    
-    //    unsigned char a[120];
-    //    a[0]=120;
-    //    a[1]=1111;
-    //    a[2]=87;
-    //    printf("%d\n",a[0]);
-    //    printf("%c\n",a[1]);
-    //    printf("%c\n",a[2]);
     void **pMangeHandle;
     void *MangeHandle;
     unsigned char message[20];
@@ -71,7 +63,7 @@ int main(){
             
             break;
         case 103:
-            printf("%d",SMF_Finalize(MangeHandle));
+            printf("%d\n",SMF_Finalize(MangeHandle));
         default:
             break;
     }

@@ -192,3 +192,21 @@ int SMF_Finalize(void* MangeHandle)
     system("mv device_temp.txt device.txt");
     return 0;
 }
+
+int SMF_GetTrapInfo(void * MangeHandle, unsigned char message[]){
+    unsigned char LocalTrap[32];
+    memset(LocalTrap, '\0', 32*sizeof(unsigned char));
+    FILE* fp1=fopen("TrapLog.txt","a");
+    int i=0,j=0;
+    for(i=0,j=1;j<=32;i++,j++)
+        LocalTrap[i]=message[j];
+    
+    if(fp1==NULL){
+        puts("file cannnot open！");
+        return 0;
+    }
+    for(i=0;i<=31;i++)
+        fputc(LocalTrap[i],fp1);
+    fclose(fp1);
+    return 0;
+}
